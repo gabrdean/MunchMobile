@@ -3,6 +3,8 @@ from flask_login import current_user, login_required
 from app.models.db import db
 from app.models import Order, MenuItem, Restaurant, MenuItemEnum
 from datetime import datetime
+from app.models.restaurants import CuisineType, PriceLevel 
+from app.forms.restaurant_form import RestaurantForm 
 
 manage_routes = Blueprint("manage", __name__)
 
@@ -18,7 +20,7 @@ def restaurant_owner_required(func):
     return login_required(wrapper)
 
 
-# Get restaurant details (owned by current user)
+# Get restaurants details (owned by current user)
 @manage_routes.route("/")
 @restaurant_owner_required
 def get_my_restaurants():
@@ -29,6 +31,7 @@ def get_my_restaurants():
         {"restaurants": [restaurant.to_dict() for restaurant in restaurants]}
     ), 200
 
+# Get restaurant by id
 @manage_routes.route("/<int:restaurant_id>")
 @restaurant_owner_required
 def get_restaurant_by_id(restaurant_id):
@@ -39,8 +42,7 @@ def get_restaurant_by_id(restaurant_id):
         return {"message": "Restaurant not found or unauthorized"}, 404
     return jsonify(restaurant.to_dict()), 200
 
-
-# Update restaurant details
+# Update restaurant
 @manage_routes.route("/<int:restaurant_id>", methods=["PUT"])
 @restaurant_owner_required
 def update_my_restaurant(restaurant_id):
@@ -50,20 +52,43 @@ def update_my_restaurant(restaurant_id):
     if not restaurant:
         return {"message": "Restaurant not found or unauthorized"}, 404
 
-    data = request.get_json()
-    restaurant.name = data.get("name", restaurant.name)
-    restaurant.address = data.get("address", restaurant.address)
-    restaurant.city = data.get("city", restaurant.city)
-    restaurant.state = data.get("state", restaurant.state)
-    restaurant.zip = data.get("zip", restaurant.zip)
-    restaurant.cuisine_type = data.get("cuisine_type", restaurant.cuisine_type)
-    restaurant.store_image = data.get("store_image", restaurant.store_image)
-    restaurant.description = data.get("description", restaurant.description)
-    restaurant.price_level = data.get("price_level", restaurant.price_level)
-    restaurant.business_hours = data.get("business_hours", restaurant.business_hours)
+    form = RestaurantForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+            
+    if form.validate_on_submit():
+        try:
+            # The price_level will now come as the enum key directly
+            price_level = PriceLevel[form.data['price_level']]
+            cuisine_type = CuisineType[form.data['cuisine_type']]
+            
+            restaurant.name = form.data['name']
+            restaurant.address = form.data['address']
+            restaurant.city = form.data['city']
+            restaurant.state = form.data['state']
+            restaurant.zip = form.data['zip']
+            restaurant.cuisine_type = cuisine_type
+            restaurant.delivery_fee = form.data['delivery_fee']
+            restaurant.business_hours = form.data['business_hours']
+            restaurant.servicing = form.data['servicing']
+            restaurant.description = form.data['description']
+            restaurant.store_image = form.data['store_image']
+            restaurant.price_level = price_level
+            restaurant.delivery_time = form.data['delivery_time']
+            
+     
 
-    db.session.commit()
-    return jsonify(restaurant.to_dict()), 200
+            db.session.commit()
+            return jsonify({"restaurant": restaurant.to_dict()}), 200
+            
+        except KeyError as e:
+            db.session.rollback()
+            return {"message": f"Invalid enum value: {str(e)}"}, 400
+        except Exception as e:
+            db.session.rollback()
+            return {"message": f"Error updating restaurant: {str(e)}"}, 400
+            
+    return {"errors": form.errors}, 400
+
 """
 {
     "name": "Updated NomNow Bistro",
@@ -77,8 +102,70 @@ def update_my_restaurant(restaurant_id):
     "business_hours": "Mon-Fri: 9 AM - 10 PM, Sat-Sun: 10 AM - 11 PM"
 }
 """
+# Delete or deactivate a restaurant
+@manage_routes.route("/<int:restaurant_id>", methods=["DELETE"])
+@restaurant_owner_required
+def delete_my_restaurant(restaurant_id):
+    restaurant = Restaurant.query.filter_by(
+        id=restaurant_id, owner_id=current_user.id
+    ).first()
+    
+    if not restaurant:
+        return {"message": "Restaurant not found or unauthorized"}, 404
 
-# Get all orders for the restaurant
+    delete_type = request.args.get('type', 'soft')  # Get delete type from query params
+    
+    try:
+        if delete_type == 'hard':            
+            # Finally delete the restaurant
+            db.session.delete(restaurant)
+            message = "Restaurant and all related data permanently deleted"
+        else:
+            # Soft delete - just update servicing status
+            restaurant.servicing = False
+            restaurant.description += "\n[INACTIVE: Restaurant is no longer operating]"
+            message = "Restaurant has been marked as inactive"
+
+        db.session.commit()
+        return {
+            "id": restaurant_id,
+            "message": message,
+            "deleteType": delete_type
+        }, 200
+        
+    except Exception as e:
+        db.session.rollback()
+        return {"message": f"Unable to process delete: {str(e)}"}, 400
+    
+
+# Reactivate a restaurant
+@manage_routes.route("/<int:restaurant_id>/reactivate", methods=["PUT"])
+@restaurant_owner_required
+def reactivate_restaurant(restaurant_id):
+    restaurant = Restaurant.query.filter_by(
+        id=restaurant_id, owner_id=current_user.id
+    ).first()
+    
+    if not restaurant:
+        return {"message": "Restaurant not found or unauthorized"}, 404
+
+    try:
+        # Update servicing status and remove inactive message
+        restaurant.servicing = True
+        if "\n[INACTIVE: Restaurant is no longer operating]" in restaurant.description:
+            restaurant.description = restaurant.description.replace(
+                "\n[INACTIVE: Restaurant is no longer operating]", 
+                ""
+            )
+
+        db.session.commit()
+        return jsonify(restaurant.to_dict()), 200
+        
+    except Exception as e:
+        db.session.rollback()
+        return {"message": f"Unable to reactivate: {str(e)}"}, 400
+
+# Get all orders for the restaurants
 @manage_routes.route("/orders")
 @restaurant_owner_required
 def get_restaurant_orders():
@@ -106,13 +193,19 @@ def get_orders_for_restaurant(restaurant_id):
     return jsonify({"orders": [order.to_dict() for order in orders]}), 200
 
 
-# Get details of a specific order
+# Get details of a specific order from an owned restaurant
 @manage_routes.route("/orders/<int:order_id>")
 @restaurant_owner_required
 def get_order_details(order_id):
     order = Order.query.get(order_id)
-    if not order or order.restaurant_id != current_user.id:
+
+    restaurant = Restaurant.query.filter_by(
+        id=order.restaurant_id, owner_id=current_user.id
+    ).first()
+
+    if not order or not restaurant:
         return {"message": "Order not found or unauthorized"}, 404
+
     return jsonify(order.to_dict()), 200
 
 

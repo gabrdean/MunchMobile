@@ -1,1 +1,67 @@
 /* TODO: Add sitewide styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-primary: 'Nunito Sans', sans-serif;
+}
+/* maybe Montserrat or Inter? */
+
+body {
+  font-family: var(--font-primary);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  color: #222;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-primary);
+  font-weight: 600;
+}
+
+button {
+  font-family: var(--font-primary);
+  font-weight: 500;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 25rem;
+  max-height: 25rem;
+}
+
+.auth-buttons {
+  margin-right: 10px;
+  padding: 8px 12px;
+  background-color: rgb(0, 0, 0) ;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.auth-buttons:hover {
+  background-color: #333333d0;
+  color: white;
+}
+
+/* test */

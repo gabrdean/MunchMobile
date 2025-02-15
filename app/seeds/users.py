@@ -5,65 +5,70 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     mar = User(
-        first_name='Mar',
-        last_name='Eats',
-        phone_number='999033959',
-        address='Same St',
-        city='Same City',
-        state='Same State',
+        first_name="Mar",
+        last_name="Eats",
+        phone_number="999033959",
+        address="Same St",
+        city="Same City",
+        state="Same State",
         zip=11111,
         wallet=9999999.99,
-        hashed_password='password',
-        email='m@user.io',
-        )
+        password="password",
+        email="m@user.io",
+        restaurant_owner=True,
+    )
     gabe = User(
-        first_name='Gabe',
-        last_name='Eats',
-        phone_number='999033958',
-        address='Same St',
-        city='Same City',
-        state='Same State',
+        first_name="Gabe",
+        last_name="Eats",
+        phone_number="999033958",
+        address="Same St",
+        city="Same City",
+        state="Same State",
         zip=11111,
         wallet=9999999.99,
-        hashed_password='password',
-        email='g@user.io',
-        )
+        password="password",
+        email="g@user.io",
+        restaurant_owner=True,
+    )
     burak = User(
-        first_name='Burak',
-        last_name='Eats',
-        phone_number='999033957',
-        address='Same St',
-        city='Same City',
-        state='Same State',
+        first_name="Burak",
+        last_name="Eats",
+        phone_number="999033957",
+        address="Same St",
+        city="Same City",
+        state="Same State",
         zip=11111,
         wallet=9999999.99,
-        hashed_password='password',
-        email='b@user.io',
-        )
+        password="password",
+        email="b@user.io",
+        restaurant_owner=True,
+    )
     katie = User(
-        first_name='Katie',
-        last_name='Eats',
-        phone_number='999033956',
-        address='Same St',
-        city='Same City',
-        state='Same State',
+        first_name="Katie",
+        last_name="Eats",
+        phone_number="999033956",
+        address="Same St",
+        city="Same City",
+        state="Same State",
         zip=11111,
         wallet=9999999.99,
-        hashed_password='password',
-        email='k@user.io',
-        )
+        password="password",
+        email="k@user.io",
+        restaurant_owner=True,
+    )
     sama = User(
-        first_name='Sama',
-        last_name='Eats',
-        phone_number='999033955',
-        address='Same St',
-        city='Same City',
-        state='Same State',
+        first_name="Sama",
+        last_name="Eats",
+        phone_number="999033955",
+        address="Same St",
+        city="Same City",
+        state="Same State",
         zip=11111,
         wallet=9999999.99,
-        hashed_password='password',
-        email='s@user.io',
-        )
+        password="password",
+        email="s@user.io",
+        restaurant_owner=True,
+    )
 
     db.session.add(mar)
     db.session.add(gabe)
@@ -84,5 +89,5 @@ def undo_users():
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM users"))
-        
+
     db.session.commit()

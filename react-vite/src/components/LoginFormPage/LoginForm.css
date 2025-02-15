@@ -1,0 +1,111 @@
+/* LoginFormPage-specific styles */
+.login-form-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa; /* Light grey background */
+    font-family: 'Arial', sans-serif;
+}
+
+.login-form-page-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-form-page-form {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+}
+
+.login-form-page-label {
+    font-weight: bold;
+    text-align: left;
+    color: #333;
+}
+
+.login-form-page-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.login-form-page-input:focus {
+    border-color: #00cc66; /* UberEats green */
+    outline: none;
+}
+
+.login-form-page-submit-button {
+    background-color: #00cc66; /* UberEats green */
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form-page-submit-button:hover {
+    background-color: #00b359; /* Slightly darker green */
+}
+
+.login-form-page-demo-button {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.login-form-page-demo-button:hover {
+    background-color: #e9ecef; /* Slightly darker grey */
+}
+
+.login-form-page-divider {
+    position: relative;
+    text-align: center;
+    margin: 1rem 0;
+    color: #666;
+}
+
+.login-form-page-divider::before,
+.login-form-page-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.login-form-page-divider::before {
+    left: 0;
+}
+
+.login-form-page-divider::after {
+    right: 0;
+}
+
+.login-form-page-error {
+    color: #ff4444; /* Red for errors */
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}

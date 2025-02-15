@@ -1,0 +1,186 @@
+.home-page {
+    
+    max-width: 75vw;
+    margin: 0 auto;
+    overflow-x: hidden;
+
+}
+
+.main-content {
+    display: flex;
+  
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* Cuisine Scroll Bar Container */
+.cuisine-scroll-bar {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;    /* Make sure it takes full width of parent */
+ 
+    gap: 20px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    
+}
+
+.cuisine-scroll-bar::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.cuisine-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    min-width: 80px;
+    transition: all 0.2s ease;
+}
+
+.cuisine-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(100%);
+}
+
+.cuisine-button:not(.disabled):hover {
+    background-color: #f5f5f5;
+}
+
+.cuisine-button.active {
+    color: #000;
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+.cuisine-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.cuisine-name {
+    font-size: 14px;
+    color: #333;
+}
+
+.cuisine-button.disabled .cuisine-name {
+    color: #999;
+}
+
+/* Filter Options */
+.filter-options {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* Restaurants Section */
+.restaurants-section {
+    width: 100%;
+}
+
+.restaurants-section h2 {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.results-count {
+    font-size: 16px;
+    color: #666;
+    font-weight: normal;
+}
+
+/* Restaurants Layout */
+.restaurants-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.restaurant-card {
+    flex: 0 0 calc(33.333% - 14px); /* Subtracting the gap */
+    min-width: 280px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1200px) {
+    .restaurant-card {
+        flex: 0 0 calc(50% - 10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .restaurant-card {
+        flex: 0 0 100%;
+    }
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+}
+
+.restaurant-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.restaurant-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.restaurant-info {
+    padding: 15px;
+}
+
+.restaurant-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.rating {
+    color: #000;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Promotions Section */
+.promotions-section {
+    width: 100%;
+}
+
+.promotions-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.promotion-card {
+    flex: 0 0 calc(25% - 15px);
+    min-width: 250px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

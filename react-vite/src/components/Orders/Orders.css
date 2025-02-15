@@ -1,0 +1,153 @@
+.orders-container {
+  padding: 30px;
+}
+
+.order-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.restaurant-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.order-header {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.order-header h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.order-details {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  color: #666;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.order-details p {
+  margin: 0;
+}
+
+.order-details a {
+  text-decoration: underline;
+}
+
+.order-header p {
+  font-size: 14px;
+  color: #666;
+  margin: 2px 0;
+}
+
+.order-items {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.order-items li {
+  padding: 5px 0;
+}
+
+.order-actions {
+  display: flex;
+  gap: 5px;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.order-actions a {
+  color: black;
+  /* font-weight: bold; */
+}
+
+.order-actions a:hover {
+  color: grey;
+}
+
+.order-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.reorder-btn,
+.rate-btn {
+  padding: 10px 14px !important;
+  font-size: 16px !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  font-weight: bold !important;
+  border: none !important;
+}
+
+.reorder-btn {
+  background-color: black !important;
+  color: white !important;
+}
+
+.rate-btn {
+  background-color: #f0f0f0 !important;
+  color: #666 !important;
+}
+
+.rate-btn:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+}
+
+.no-orders-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.no-orders-icon {
+  width: 80px;
+  margin-bottom: 1px;
+  opacity: 0.6;
+}
+
+.no-orders-container h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: auto;
+}
+
+.no-orders-container p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.find-food-btn {
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.find-food-btn:hover {
+  background-color: #333;
+}

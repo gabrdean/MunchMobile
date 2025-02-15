@@ -1,0 +1,77 @@
+/* Container for the entire component */
+.menu-item-delete-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Heading */
+  .menu-item-delete-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #000000;
+  }
+  
+  /* Buttons */
+  .delete-button,
+  .cancel-button {
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+  }
+  
+  .delete-button {
+    background-color: #ff0000; /* Red background */
+    border: 1px solid #ff0000;
+    color: #ffffff; /* White text */
+  }
+  
+  .delete-button:hover {
+    background-color: #ffffff; /* White background */
+    color: #ff0000; /* Red text */
+    border: 1px solid #ff0000;
+  }
+  
+  .cancel-button {
+    background-color: #000000; /* Black background */
+    border: 1px solid #000000;
+    color: #ffffff; /* White text */
+    margin-left: 10px;
+  }
+  
+  .cancel-button:hover {
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text */
+    border: 1px solid #000000;
+  }
+  
+  /* Error message */
+  .error-message {
+    color: #ff0000;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .menu-item-delete-container {
+      padding: 15px;
+    }
+  
+    .menu-item-delete-container h2 {
+      font-size: 22px;
+    }
+  
+    .delete-button,
+    .cancel-button {
+      font-size: 14px;
+      padding: 10px 20px;
+    }
+  }

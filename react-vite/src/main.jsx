@@ -8,6 +8,7 @@ import * as sessionActions from "./redux/session";
 import "./index.css";
 
 const store = configureStore();
+const isStrictMode = import.meta.env.VITE_STRICT_MODE === 'true';
 
 if (import.meta.env.MODE !== "production") {
   window.store = store;
@@ -15,9 +16,15 @@ if (import.meta.env.MODE !== "production") {
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <ReduxProvider store={store}>
+  isStrictMode ? (
+		<React.StrictMode>
+			<ReduxProvider store={store}>
       <RouterProvider router={router} />
     </ReduxProvider>
-  </React.StrictMode>
+		</React.StrictMode>
+	) : (
+		<ReduxProvider store={store}>
+      <RouterProvider router={router} />
+    </ReduxProvider>
+	)
 );

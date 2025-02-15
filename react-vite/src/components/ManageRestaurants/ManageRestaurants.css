@@ -1,0 +1,115 @@
+
+.manage-restaurants {
+    max-width: 75vw;
+    margin: 0 auto;
+    overflow-x: hidden;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.manage-restaurants h1 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    text-align: center;
+}
+
+.restaurants-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.restaurant-card {
+    flex: 0 0 calc(50% - 14px);
+    min-width: 350px;
+    max-width: 500px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+}
+
+.restaurant-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.restaurant-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: none;
+    max-height: none;
+}
+
+.restaurant-info {
+    padding: 15px;
+}
+
+.restaurant-info h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.status-badge.active {
+    background-color: #e6f4ea;
+    color: #1e7e34;
+}
+
+.status-badge.inactive {
+    background-color: #feeced;
+    color: #dc3545;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.button-group .auth-buttons {
+    flex: 1 1 calc(50% - 5px);
+    min-width: 120px;
+}
+
+.add-restaurant-button {
+    margin-top: 30px;
+    padding: 12px 24px;
+    font-size: 16px;
+    width: fit-content;
+}
+
+@media (max-width: 1200px) {
+    .restaurant-card {
+        flex: 0 0 calc(75% - 10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .restaurant-card {
+        flex: 0 0 100%;
+    }
+    
+    .manage-restaurants {
+        max-width: 90vw;
+    }
+}

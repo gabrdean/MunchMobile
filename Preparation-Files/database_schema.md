@@ -1,6 +1,6 @@
 # Database Schema
 
-# Layout 
+# Layout
 <img width="848" alt="image" src="https://github.com/user-attachments/assets/93682c52-f826-4efe-8fd5-9067050d7d9d" />
 
 
@@ -8,9 +8,13 @@
 | Column | Type | Constraints |
 |--------|------|-------------|
 | id | int | PRIMARY KEY |
+| firsName | varchar | NOT NULL |
+| lastName | varchar | NOT NULL |
+| phoneNumber | varchar | UNIQUE, NOT NULL |
+| restaurantOwner | boolean | |
 | first_name | varchar | NOT NULL |
 | last_name | varchar | NOT NULL |
-| phone_number | varchar | UNIQUE | NOT NULL | 
+| phone_number | varchar | UNIQUE | NOT NULL |
 | restarauntOwner | boolean | |
 | address | varchar | NOT NULL |
 | city | varchar | NOT NULL |
@@ -22,7 +26,7 @@
 | createdAt | timestamp | |
 | updatedAt | timestamp | |
 
-## Restaraunts Table
+## Restaurants Table
 | Column | Type | Constraints |
 |--------|------|-------------|
 | id | int | PRIMARY KEY |
@@ -32,13 +36,13 @@
 | state | varchar | NOT NULL |
 | zip | int | NOT NULL |
 | name | varchar | UNIQUE, NOT NULL |
-| cuisineType | varchar | |
+| cuisineType | enum | |
 | deliveryFee | decimal | |
 | businessHours | varchar | NOT NULL |
 | Servicing | boolean | |
 | storeImage | url | |
 | description | text | |
-| priceLevel | int | |
+| priceLevel | enum | |
 | deliveryTime | int | |
 | createdAt | timestamp | |
 | updatedAt | timestamp | |
@@ -47,7 +51,7 @@
 | Column | Type | Constraints |
 |--------|------|-------------|
 | id | int | PRIMARY KEY |
-| restarauntId | int | |
+| restaurantId | int | |
 | userId | int | |
 | orderId | int | |
 | review | text | |
@@ -60,7 +64,7 @@
 | Column | Type | Constraints |
 |--------|------|-------------|
 | id | int | PRIMARY KEY |
-| restarauntId | int | |
+| restaurantId | int | |
 | name | varchar | |
 | foodtype | ENUM | ('Appetizers', 'Entrees', 'Desserts', 'Drinks') |
 | description | text | |
@@ -69,23 +73,36 @@
 | createdAt | timestamp | |
 | updatedAt | timestamp | |
 
-## PastOrders Table
+## Orders Table
 | Column | Type | Constraints |
 |--------|------|-------------|
 | id | int | PRIMARY KEY |
+| restaurantId | int | |
 | userId | int | |
-| itemId | int | |
-| quantity | int | |
+| totalCost | decimal | |
+| status | enum | ('Completed', 'Canceled', 'Active') |
 | promo | varchar | |
 | createdAt | timestamp | |
 | updatedAt | timestamp | |
 
+## OrderItems Table
+| Column | Type | Constraints |
+|--------|------|-------------|
+| id | int | PRIMARY KEY |
+| orderId | int | |
+| menuItemId | int | |
+| quantity | int | |
+| price | decimal | |
+
 ## Foreign Key References
 ```
 Users.id < Reviews.userId
-Users.id < PastOrders.userId
-Users.id < Restaraunts.ownerId
-Restaraunts.id < MenuItems.restarauntId
-Restaraunts.id < Reviews.restarauntId
-MenuItems.id < PastOrders.itemId
+Users.id < Orders.userId
+Users.id < Restaurants.ownerId
+Restaurants.id < MenuItems.restaurantId
+Restaurants.id < Reviews.restaurantId
+MenuItems.id < Orders.totalCost
+MenuItems.restaurantId < Orders.restaurantId
+Orders.id < OrderItems.orderId
+MenuItems.id < OrderItems.menuItemId
 ```

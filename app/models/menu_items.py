@@ -1,8 +1,9 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from datetime import datetime
+import datetime
 import enum
+
 
 class MenuItemEnum(enum.Enum):
     appetizer = "appetizer"
@@ -14,37 +15,43 @@ class MenuItemEnum(enum.Enum):
     def to_list():
         return [item.value for item in MenuItemEnum]
 
+
 class MenuItem(db.Model):
-    __tablename__ = 'menu_items'
+    __tablename__ = "menu_items"
 
     if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+        __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    restaurantId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('restaurants.id')), nullable=False)
+    restaurant_id = db.Column(
+        db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), nullable=False
+    )
     name = db.Column(db.String, nullable=False)
-    foodType = db.Column(db.Enum(MenuItemEnum), nullable=False)
+    food_type = db.Column(db.Enum(MenuItemEnum), nullable=False)
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    foodImage = db.Column(db.String(255), nullable=False)
-    createdAt = db.Column(db.DateTime, nullable=False)
-    updatedAt = db.Column(db.DateTime, nullable=False)
+    food_image = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now())
+    updated_at = db.Column(
+        db.DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now()
+    )
 
     # one-to-many: one restaurant can have many menu_items
     restaurants = db.relationship("Restaurant", back_populates="menu_items")
     # one-to-many: one order can have many menu_items
-    order_items = db.relationship("OrderItem", back_populates="menu_items")
-    
+    order_items = db.relationship(
+        "OrderItem", back_populates="menu_items", cascade="all, delete-orphan"
+    )
 
     def to_dict(self):
         return {
             "id": self.id,
-            "restaurantId": self.restaurantId,
+            "restaurantId": self.restaurant_id,
             "name": self.name,
-            "foodType": self.foodType,
+            "food_type": self.food_type.value,
             "description": self.description,
             "price": self.price,
-            "foodImage": self.foodImage,
-            "createdAt": self.createdAt,
-            "updatedAt": self.updatedAt
+            "food_image": self.food_image,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
         }

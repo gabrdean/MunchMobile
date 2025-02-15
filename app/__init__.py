@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect,jsonify,Blueprint
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
@@ -8,8 +8,13 @@ from .models import db, User, MenuItem, Order, Restaurant, Review, OrderItem
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.order_routes import order_routes
+from .api.menu_items_routes import menu_item_routes
+from .api.restaurants_routes import restaurant_routes
+from .api.review_routes import review_routes
+from .api.manage_routes import manage_routes
 from .seeds import seed_commands
 from .config import Config
+from enum import Enum
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 
@@ -30,6 +35,11 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(order_routes, url_prefix='/api/orders')
+app.register_blueprint(menu_item_routes, url_prefix='/api/menu-items')
+app.register_blueprint(restaurant_routes, url_prefix='/api/restaurants')
+app.register_blueprint(review_routes, url_prefix="/api/reviews")
+app.register_blueprint(manage_routes, url_prefix="/api/manage")
+
 db.init_app(app)
 Migrate(app, db)
 
@@ -91,3 +101,4 @@ def react_root(path):
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
+

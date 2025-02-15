@@ -17,7 +17,7 @@
     }
   },
   cart: {
-    userId: 2,
+    user_id: 2,
     storeId: 2124,
     storeName: 'FireWings', // optional
     storeAddress: 'etc', // optional
@@ -43,7 +43,7 @@
     },
     total: 55,
     tax: 0.04,
-    deliveryFee: 5,
+    delivery_fee: 5,
   },
   session: {
     user: {
@@ -53,7 +53,7 @@
       email: 'BobBobber@aa.io',
       phone: '14125232345',
       wallet: 100,
-      restaurantOwner: true,
+      restaurant_owner: true,
       address: '22 Forever Drive',
       city: 'Los Angeles',
       state: 'CA',
@@ -61,9 +61,9 @@
     },
     pastOrders: {
       1: {
-        orderId: 123,
+        order_id: 123,
         order: {
-            userId: 2,
+            user_id: 2,
             storeId: 2124,
             storeName: 'FireWings', // optional
             storeAddress: 'etc', // optional
@@ -89,13 +89,13 @@
             },
             total: 55,
             tax: 0.04,
-            deliveryFee: 5,
+            delivery_fee: 5,
           },
         },
       2: {
-        orderId: 332,
+        order_id: 332,
         order: {
-          userId: 2,
+          user_id: 2,
           storeId: 2124,
           storeName: 'FireWings', // optional
           storeAddress: 'etc', // optional
@@ -121,7 +121,7 @@
           },
           total: 55,
           tax: 0.04,
-          deliveryFee: 5,
+          delivery_fee: 5,
         },
       },
     },
@@ -130,144 +130,144 @@
     1: {
       id: 23,
       name: 'FireWings',
-      ownerId: 3,
-      priceLevel: 2,
+      owner_id: 3,
+      price_level: 2,
       address: '464 8th Street',
       city: 'Oakland',
       state: 'CA',
       zip: '94607',
-      cuisineType: 'Asian',
-      deliveryFee: 3.20,
-      businessHours: ,
+      cuisine_type: 'Asian',
+      delivery_fee: 3.20,
+      business_hours: ,
       servicing: true,
-      storeImage: 'banner.img',
+      store_image: 'banner.img',
       description: 'blah blah',
-      deliveryTime: 30
+      delivery_time: 30
       menu: {
         1: {
           id: 2,
           name: 'Wings',
-          foodType: 'Entree',
+          food_type: 'Entree',
           description: 'crispy',
           price: 3.99,
-          foodImage: 'wings.url',
+          food_image: 'wings.url',
         },
         2: {
           id: 43,
           name: 'Wings',
-          foodType: 'Entree',
+          food_type: 'Entree',
           description: 'crispy',
           price: 3.99,
-          foodImage: 'wings.url',
+          food_image: 'wings.url',
         },
         3: {
           id: 14,
           name: 'Wings',
-          foodType: 'Entree',
+          food_type: 'Entree',
           description: 'crispy',
           price: 3.99,
-          foodImage: 'wings.url',
+          food_image: 'wings.url',
         }
       },
       reviews: {
         1: {
           id: 23,
-          restaurantId: 2,
-          userId: 4,
-          orderId: 42,
+          restaurant_id: 2,
+          user_id: 4,
+          order_id: 42,
           review: 'great',
-          orderRating: 5,
-          restaurantRating: 4
+          order_rating: 5,
+          restaurant_rating: 4
         },
         2: {
           id: 233,
-          restaurantId: 32,
-          userId: 14,
-          orderId: 42,
+          restaurant_id: 32,
+          user_id: 14,
+          order_id: 42,
           review: 'great',
-          orderRating: 5,
-          restaurantRating: 4
+          order_rating: 5,
+          restaurant_rating: 4
         },
         3: {
           id: 123,
-          restaurantId: 22,
-          userId: 4,
-          orderId: 42,
+          restaurant_id: 22,
+          user_id: 4,
+          order_id: 42,
           review: 'great',
-          orderRating: 5,
-          restaurantRating: 4
+          order_rating: 5,
+          restaurant_rating: 4
         }
       },
     },
     2: {
       id: 123,
       name: 'FireWings2',
-      ownerId: 3,
-      priceLevel: 2,
+      owner_id: 3,
+      price_level: 2,
       address: '464 8th Street',
       city: 'Oakland',
       state: 'CA',
       zip: '94607',
-      cuisineType: 'Asian',
-      deliveryFee: 3.20,
-      businessHours: ,
+      cuisine_type: 'Asian',
+      delivery_fee: 3.20,
+      business_hours: ,
       servicing: true,
-      storeImage: 'banner.img',
+      store_image: 'banner.img',
       description: 'blah blah',
-      deliveryTime: 30,
+      delivery_time: 30,
       menu: {
         1: {
           id: 2,
           name: 'Wings',
-          foodType: 'Entree',
+          food_type: 'Entree',
           description: 'crispy',
           price: 3.99,
-          foodImage: 'wings.url',
+          food_image: 'wings.url',
         },
         2: {
           id: 43,
           name: 'Wings',
-          foodType: 'Entree',
+          food_type: 'Entree',
           description: 'crispy',
           price: 3.99,
-          foodImage: 'wings.url',
+          food_image: 'wings.url',
         },
         3: {
           id: 14,
           name: 'Wings',
-          foodType: 'Entree',
+          food_type: 'Entree',
           description: 'crispy',
           price: 3.99,
-          foodImage: 'wings.url',
+          food_image: 'wings.url',
         }
       },
       reviews: {
         1: {
           id: 23,
-          restaurantId: 2,
-          userId: 4,
-          orderId: 42,
+          restaurant_id: 2,
+          user_id: 4,
+          order_id: 42,
           review: 'great',
-          orderRating: 5,
-          restaurantRating: 4
+          order_rating: 5,
+          restaurant_rating: 4
         },
         2: {
           id: 233,
-          restaurantId: 32,
-          userId: 14,
-          orderId: 42,
+          restaurant_id: 32,
+          user_id: 14,
+          order_id: 42,
           review: 'great',
-          orderRating: 5,
-          restaurantRating: 4
+          order_rating: 5,
+          restaurant_rating: 4
         },
         3: {
           id: 123,
-          restaurantId: 22,
-          userId: 4,
-          orderId: 42,
+          restaurant_id: 22,
+          user_id: 4,
+          order_id: 42,
           review: 'great',
-          orderRating: 5,
-          restaurantRating: 4
+          order_rating: 5,
+          restaurant_rating: 4
         }
       },
     }

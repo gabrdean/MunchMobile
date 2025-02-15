@@ -1,0 +1,216 @@
+.checkout-page {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f8f8f8;
+}
+
+.checkout-left {
+  flex: 2;
+  background: f8f8f8;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.checkout-right {
+  flex: 1;
+  /* background: white; */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.delivery-section,
+.delivery-options,
+.payment-section,
+.restaurant-header,
+.order-summary,
+.order-total {
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tip-section {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-color: #f5f5f5;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.delivery-options span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.delivery-options:hover {
+  background: #f9f9f9;
+}
+
+.delivery-options.selected {
+  border: 2px solid black;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.credit-card span,
+.wallet span {
+  font-weight: bold;
+}
+
+.wallet {
+  display: flex;
+  justify-content: space-between;
+}
+
+.confirm-order-btn {
+  width: 100% !important;
+  padding: 12px !important;
+  background: black !important;
+  color: white !important;
+  border: none !important;
+  cursor: pointer !important;
+  border-radius: 8px !important;
+}
+
+.checkout-page .tip-buttons button {
+  background: #eee !important;
+  border: none !important;
+  padding: 8px 12px !important;
+  cursor: pointer !important;
+  margin: .2rem !important;
+  border-radius: 25px !important;
+  color: black !important;
+}
+
+.checkout-page .tip-buttons button:hover {
+  background: #eee !important;
+  border: 1px solid !important;
+}
+
+.checkout-page .tip-buttons button.selected-tip {
+  background: black !important;
+  color: white !important;
+}
+
+.delivery-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.d-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid;
+  border-color: rgb(225, 225, 225);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.d-option span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.d-option .extra-fee {
+  font-weight: bold;
+  color: black;
+}
+
+.d-option:hover {
+  background: #f9f9f9;
+}
+
+.d-option.selected {
+  border: 1.8px solid black;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.priority {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.priority .faster-badge {
+  background: #0c9b50;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin-left: 8px;
+}
+
+.standard,
+.schedule {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  padding: 16px;
+}
+
+.schedule span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.restaurant-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.restaurant-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.restaurant-info h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.restaurant-address {
+  font-size: 14px;
+  color: gray;
+  margin-top: 2px;
+}
+
+.restaurant-header .arrow {
+  font-size: 18px;
+  color: black;
+  transition: transform 0.2s ease;
+  margin-right: 1rem;
+}
+
+.restaurant-header:hover .arrow {
+  transform: translateX(5px);
+  color: gray;
+}

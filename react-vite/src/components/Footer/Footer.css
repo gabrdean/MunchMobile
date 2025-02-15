@@ -1,0 +1,80 @@
+#footer {
+    margin-top: 50px;
+    border-top: 1px solid #dadada;
+    border-bottom: 0.5px solid #cecece;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column; /* Stack the elements vertically */
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #footer-logo {
+    text-align: center;
+    margin-bottom: 30px; /* Space between logo and contact section */
+  }
+  
+  #footer-logo-text {
+    font-size: 80px;
+    font-weight: 300;
+    color: black;
+  }
+  
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .footer-contact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* Space between each contact */
+  }
+  
+  .footer-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .footer-name div {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+  }
+  
+  .footer-links {
+    font-size: 12px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  #footer-copyright {
+    color: black;
+    display: flex;
+    justify-content: center;
+    padding: 15px 20px;
+    font-size: 11px;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  a {
+    color: black;
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+  a:hover {
+    color: #333; /* Darker color when hovering */
+  }
+  
+  .footer-links i {
+    font-size: 20px;
+  }
+  

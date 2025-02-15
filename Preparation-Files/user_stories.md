@@ -40,8 +40,6 @@
 
 ## Restaraunts 
 
-  ## Customer-Side 
-
 * I want to be able to view all the restaraunts by clicking hte restaraunt tab on the navbar so that I can find options to order from. 
 
 * As a logged in user i want to be able to favorite a restaraunt by clicking the "Heart" button. 

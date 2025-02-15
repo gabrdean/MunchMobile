@@ -1,0 +1,34 @@
+
+.main-page{
+    width: 100vh;
+    padding: 10px;
+}
+.info-blocks{
+    display: flex;
+    height: 30px;
+    width: 100%;
+    border-bottom: 2px solid gray;
+    align-items: center;
+    gap: 2px;
+}
+.info-blocks button{
+    justify-self: flex-end;
+    margin-left: auto;
+    background-color: transparent;
+    border: none;
+}
+.info-holders{
+    font-weight: bold;
+}
+.pfp{
+    height: 50px;
+}
+.info-text{
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.pfp:hover{
+    cursor: pointer;
+}
+

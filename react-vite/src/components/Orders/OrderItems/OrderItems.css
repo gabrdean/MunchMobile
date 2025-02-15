@@ -1,0 +1,16 @@
+.order-item-details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.quantity {
+  color: #666;
+  font-weight: normal;
+}
+
+.item-name {
+  text-transform: uppercase;
+  color: rgb(76, 76, 76);
+}

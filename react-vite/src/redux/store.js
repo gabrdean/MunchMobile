@@ -1,3 +1,4 @@
+//react-vite/src/redux/store.js
 import {
   legacy_createStore as createStore,
   applyMiddleware,
@@ -6,12 +7,24 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
+import reviewsReducer from "./reviews";
+import ordersReducer from './orders';
+import menuReducer from "./menuItems";
+import errorsReducer from './errors';
 import restaurantReducer from './restaurants';
+import cartReducer from './cart';
 
 
 const rootReducer = combineReducers({
-  session: sessionReducer,
+	session: sessionReducer,
+	orders: ordersReducer,
+  menuItems: menuReducer,
+	// manage: manageReducer,
+	errors: errorsReducer,
+  reviews: reviewsReducer,
+  // import manageReducer from './manage';
   restaurants: restaurantReducer,
+  cart: cartReducer
 });
 
 let enhancer;

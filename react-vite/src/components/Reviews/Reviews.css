@@ -1,0 +1,186 @@
+/* Reviews Container */
+.reviews-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Review List */
+.review-list {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* Review Item */
+.review-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+/* Rating Container */
+.rating-container {
+  margin-top: 10px;
+}
+
+/* Rating Item */
+.rating-item {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+/* Review Actions */
+.review-actions {
+  margin-top: 10px;
+}
+
+/* Button styles for all buttons */
+.review-buttons {
+  margin-right: 10px;
+  padding: 10px 15px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.review-buttons:hover {
+  background-color: #333333d0;
+  color: white;
+}
+
+/* Star Rating Styles for the form */
+.star-rating {
+  margin: 10px 0;
+}
+
+.star-rating label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.star-rating .star {
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.star-rating .star.selected {
+  color: #ffcc00;
+}
+
+.star-rating .star:hover {
+  color: #ffcc00;
+}
+
+.rating-value {
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+/* Modal Styles */
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Review Overlay Styles */
+.review-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+/* Reviews.css */
+
+.review-item {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.rating-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.rating-item {
+  font-size: 0.9em;
+}
+
+.rating-item span {
+  color: #ffcc00;
+}
+
+.review-actions {
+  margin-top: 10px;
+}
+
+/* Ensure review-actions buttons match the global button style */
+.review-actions button {
+  margin-right: 10px;
+  padding: 8px 15px;
+  background-color: rgba(5, 146, 0, 0.884);
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.review-actions button:hover {
+  background-color: rgba(5, 146, 0, 0.534);
+  color: white;
+}
+
+/* Textarea Styling for Review Form */
+:where(textarea) {
+  width: 95%;
+  height: fit-content;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #e6dddd;
+  color: #000000;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+:where(textarea):focus {
+  border-color: #666;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+
+:where(textarea)::placeholder {
+  color: #aaa;
+}

@@ -1,5 +1,4 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed
 from wtforms import (
     StringField,
     SelectField,
@@ -10,28 +9,45 @@ from wtforms import (
     URLField,
 )
 from wtforms.validators import DataRequired, Length, NumberRange, URL, Optional
-from app.models.restaurants import cuisineType
+from app.models.restaurants import CuisineType, PriceLevel
+
 
 class RestaurantForm(FlaskForm):
-    name = StringField('Restaurant Name', 
-        validators=[DataRequired(), Length(min=1, max=255)])
+    name = StringField(
+        "Restaurant Name", validators=[DataRequired(), Length(min=1, max=255)]
+    )
+
+    address = StringField(
+        "Address",
+        validators=[DataRequired(message="Street Adress is Required"), Length(max=255)],
+    )
+
+    city = StringField(
+        "City", validators=[DataRequired(message="Select a City"), Length(max=255)]
+    )
+
+    state = StringField(
+        "State",
+        validators=[
+            DataRequired(message="Please Select a CuisineType"),
+            Length(max=255),
+        ],
+    )
+
+    zip = IntegerField(
+        "ZIP Code", validators=[DataRequired(), NumberRange(min=1, max=99999)]
+    )
+
+    cuisine_type = SelectField(
+        "Cuisine Type",
+        choices=[(c.name, c.value) for c in CuisineType],  # Store as Enum keys
+        validators=[DataRequired()],
+    )
     
-    address = StringField('Address', 
-        validators=[DataRequired(message = "Street Adress is Required"), Length(max=255)])
-    
-    city = StringField('City', 
-        validators=[DataRequired(message = "Select a City"), Length(max=255)])
-    
-    state = StringField('State', 
-        validators=[DataRequired(message = "Please Select a cuisineType"), Length(max=255)])
-    
-    zip = IntegerField('ZIP Code', 
-        validators=[DataRequired(), NumberRange(min=1, max=99999)])
-    
-    cuisineType = SelectField(
-        'Cuisine Type',
-        choices=[(cuisine.value, cuisine.value) for cuisine in cuisineType],
-        validators=[DataRequired()]
+    price_level = SelectField(
+        "Price Level",
+        choices=[(p.name, p.value) for p in PriceLevel],  # Store as Enum keys
+        validators=[DataRequired()],
     )
 
     delivery_fee = DecimalField("Delivery Fee", validators=[Optional()], places=2)
@@ -42,10 +58,7 @@ class RestaurantForm(FlaskForm):
 
     servicing = BooleanField("Currently servicing", default=True)
 
-    store_image = FileField('Upload Image', validators=[
-        Optional(),
-        FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!')
-    ])
+    store_image = URLField("Store Image URL", validators=[Optional(), URL()])
 
     description = TextAreaField("Description", validators=[DataRequired()])
 
@@ -55,17 +68,19 @@ class RestaurantForm(FlaskForm):
 
     def to_dict(self):
         return {
-            'name': self.name.data,
-            'address': self.address.data,
-            'city': self.city.data,
-            'state': self.state.data,
-            'zip': self.zip.data,
-            'cuisineType': self.cuisineType.data,
-            'deliveryFee': float(self.deliveryFee.data) if self.deliveryFee.data else None,
-            'businessHours': self.businessHours.data,
-            'Servicing': self.Servicing.data,
-            'storeImage': self.storeImage.data,
-            'description': self.description.data,
-            'priceLevel': self.priceLevel.data,
-            'deliveryTime': self.deliveryTime.data
+            "name": self.name.data,
+            "address": self.address.data,
+            "city": self.city.data,
+            "state": self.state.data,
+            "zip": self.zip.data,
+            "cuisine_type": self.cuisine_type.data,
+            "delivery_fee": float(self.delivery_fee.data)
+            if self.delivery_fee.data
+            else None,
+            "business_hours": self.business_hours.data,
+            "servicing": self.servicing.data,
+            "store_image": self.store_image.data,
+            "description": self.description.data,
+            "price_level": self.price_level.data,
+            "delivery_time": self.delivery_time.data,
         }

@@ -1,0 +1,123 @@
+/* Container for the entire form */
+.update-menu-item-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Back button */
+  .back-button {
+    background-color: #000000; /* Black background */
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+    color: #ffffff; /* White text */
+  }
+  
+  .back-button:hover {
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text */
+  }
+  
+  /* Form styling */
+  .update-menu-item-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between form fields */
+  }
+  
+  .update-menu-item-form h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #000000;
+  }
+  
+  .update-menu-item-form label {
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 5px;
+  }
+  
+  .update-menu-item-form input,
+  .update-menu-item-form textarea,
+  .update-menu-item-form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .update-menu-item-form input:focus,
+  .update-menu-item-form textarea:focus,
+  .update-menu-item-form select:focus {
+    border-color: #000000;
+    outline: none;
+  }
+  
+  .update-menu-item-form textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px;
+  }
+  
+  /* Error messages */
+  .error-message {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  /* Submit button */
+  .submit-button {
+    background-color: #000000; /* Black background */
+    border: none;
+    color: #ffffff; /* White text */
+    font-size: 18px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  .submit-button:hover {
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text */
+    border: 1px solid #000000;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .update-menu-item-container {
+      padding: 15px;
+    }
+  
+    .update-menu-item-form h3 {
+      font-size: 22px;
+    }
+  
+    .update-menu-item-form label {
+      font-size: 14px;
+    }
+  
+    .update-menu-item-form input,
+    .update-menu-item-form textarea,
+    .update-menu-item-form select {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    .submit-button {
+      font-size: 16px;
+      padding: 10px 20px;
+    }
+  }
