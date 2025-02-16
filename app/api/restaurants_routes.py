@@ -57,6 +57,11 @@ def get_restaurant_by_id(restaurant_id):
 @restaurant_routes.route("/", methods=["POST"])
 @login_required
 def create_restaurant():
+    # Make the user a restaurant owner if they aren't already
+    if not current_user.restaurant_owner:
+        current_user.restaurant_owner = True
+        db.session.commit()
+        
     form = RestaurantForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
@@ -80,6 +85,7 @@ def create_restaurant():
             "business_hours": form.business_hours.data,
             "servicing": form.servicing.data,
             "description": form.description.data,
+            "store_image": form.store_image.data,
             "price_level": form.price_level.data,
             "delivery_time": form.delivery_time.data,
             "owner_id": current_user.id,

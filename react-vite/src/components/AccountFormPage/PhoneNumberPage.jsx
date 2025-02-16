@@ -51,7 +51,7 @@ function PhoneNumberPage(){
     return (
 			<div>
 				<h1>Phone Number</h1>
-				{"You'll use this number sign in"}
+				{"You'll use this phone number sign in"}
 				<input
 					type='text'
 					value={phoneNumber}

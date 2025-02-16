@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
-import { FaShoppingCart, FaTimes, FaEllipsisV } from 'react-icons/fa';
+import { FaShoppingCart, FaTimes } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { getCart, checkoutCart, clearCart } from '../../redux/cart';
-import Order from '../Orders/Order';
+import Order from '../Orders/Order/Order.jsx';
 import './Cart.css';
 
 export default function Cart() {
@@ -14,23 +14,50 @@ export default function Cart() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-		const menuRef = useRef(null);
+	const menuRef = useRef(null);
+	const userId = useSelector((state) => state.session?.user?.id || 'guest');
 
 	const handleCheckout = async () => {
 		if (cartItems.length === 0) return;
 
 		const { payload } = await dispatch(checkoutCart());
 
+		// console.log('CART', payload);
+
+
 		if (payload) {
 			localStorage.setItem('currentOrder', JSON.stringify(payload));
+			setMenuOpen(false)
+			setIsOpen(false)
 			navigate('/checkout');
 		}
 	};
 
-	const handleClearCart = () => {
-		dispatch(clearCart());
+	const handleClearCart = (userId) => {
+		dispatch(clearCart(userId));
 		setMenuOpen(false);
 	};
+
+
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = 'auto';
+		}
+	}, [isOpen]);
+
+	useEffect(() => {
+		if (userId) {
+			dispatch(getCart(userId));
+		}
+	}, [dispatch, userId]);
+
+	// useEffect(() => {
+	// 	if (!cartItems) {
+	// 		dispatch(getCart());
+	// 	}
+	// }, [dispatch, cartItems]);
 
 	// useEffect(() => {
 	// 	const savedOrder = JSON.parse(localStorage.getItem('currentOrder'));
@@ -44,19 +71,6 @@ export default function Cart() {
 	// 	}
 	// }, [currentOrder, dispatch, navigate]);
 
-	useEffect(() => {
-		if (!cartItems) {
-			dispatch(getCart());
-		}
-	}, [dispatch, cartItems]);
-
-	useEffect(() => {
-		if (isOpen) {
-			document.body.style.overflow = 'hidden';
-		} else {
-			document.body.style.overflow = 'auto';
-		}
-	}, [isOpen]);
 
 	// useEffect(() => {
 	// 	const handleEscape = (event) => {
@@ -132,12 +146,13 @@ export default function Cart() {
 							ref={menuRef}
 							className='cart-menu-btn'
 							onClick={() => setMenuOpen(!menuOpen)}>
-							<FaEllipsisV />
+							{/* <FaEllipsisV /> */}
+							🗑️
 						</button>
 						{menuOpen && (
 							<div className='cart-menu-dropdown'>
 								<button
-									onClick={handleClearCart}
+									onClick={handleClearCart(userId)}
 									className='clear-cart-btn'>
 									🗑️ Clear Cart
 								</button>

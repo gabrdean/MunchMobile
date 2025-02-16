@@ -6,7 +6,7 @@
 /* Create New Menu Item Button */
 .menu-item-list__create-button {
   background-color: #000000;
-  border: none;
+  border: 1px solid #000000;
   color: #ffffff;
   font-size: 16px;
   padding: 10px 20px;
@@ -17,7 +17,8 @@
 }
 
 .menu-item-list__create-button:hover {
-  background-color: #333333;
+  background-color: white;
+  color:black;
 }
 
 /* Empty Message */
@@ -128,7 +129,8 @@
 }
 
 .menu-item-list__add-to-cart-btn:hover {
-  background-color: gray;
+  background-color:white;
+  color:black;
 }
 
 .menu-item-list__add-to-cart-btn:focus {

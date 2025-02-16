@@ -1,14 +1,14 @@
 const SET_ERROR = 'errors/setError';
-const CLEAR_ERROR = 'errors/clearError';
+// const CLEAR_ERROR = 'errors/clearError';
 
 export const setError = (error) => ({
 	type: SET_ERROR,
 	payload: error,
 });
 
-const clearError = () => ({
-	type: CLEAR_ERROR,
-});
+// const clearError = () => ({
+// 	type: CLEAR_ERROR,
+// });
 
 export const handleApiError =
 	(actionThunk) =>
@@ -32,8 +32,8 @@ export default function errorsReducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_ERROR:
 			return { ...state, ...action.payload };
-		case CLEAR_ERROR:
-			return { ...null };
+		// case CLEAR_ERROR:
+		// 	return { ...null };
 		default:
 			return state;
 	}

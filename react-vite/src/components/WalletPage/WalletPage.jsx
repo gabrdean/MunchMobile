@@ -12,11 +12,16 @@ function WalletPage(){
         e.preventDefault()
         console.log('USER:', user)
 
-        const fundsObject = {
-            id: user.id,
-            amount: 1000.99
+        if(user && !user.guestAccount){
+            const fundsObject = {
+                id: user.id,
+                amount: 1000
+            }
+            dispatch(addFundsThunk(fundsObject))
+        } else if(user.guestAccount){
+            user.wallet += 1000
         }
-        dispatch(addFundsThunk(fundsObject))
+        
     }
 
     return(

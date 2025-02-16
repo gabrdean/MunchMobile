@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import { clearCart, loadCart } from './cart';
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
@@ -18,58 +19,86 @@ const editUser = (payload) => ({
   payload
 })
 
+
 export const thunkAuthenticate = () => async (dispatch) => {
-	const response = await fetch("/api/auth/");
+  const response = await fetch("/api/auth/");
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(setUser(data));
+  }
+};
+
+export const thunkLogin = (credentials) => async (dispatch) => {
+	const response = await fetch('/api/auth/login', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(credentials),
+	});
+
 	if (response.ok) {
 		const data = await response.json();
-		if (data.errors) {
-			return;
+		const newUserId = data.id;
+		const prevUserId = localStorage.getItem('currentUser');
+
+		localStorage.setItem('currentUser', newUserId);
+
+		// If different user logs in, clear Redux slice but keep their cart saved
+		if (prevUserId && prevUserId !== newUserId) {
+			dispatch(clearCart());
 		}
 
 		dispatch(setUser(data));
+
+		const savedCart =
+			JSON.parse(localStorage.getItem(`cartItems_${newUserId}`)) || [];
+		dispatch(loadCart(savedCart));
 	}
 };
 
-export const thunkLogin = (credentials) => async dispatch => {
-  const response = await fetch("/api/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(credentials)
-  });
-
-  if(response.ok) {
-    const data = await response.json();
-    dispatch(setUser(data));
-  } else if (response.status < 500) {
-    const errorMessages = await response.json();
-    return errorMessages
-  } else {
-    return { server: "Something went wrong. Please try again" }
-  }
-};
-
 export const thunkSignup = (user) => async (dispatch) => {
-  const response = await fetch("/api/auth/signup", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(user)
+  const response = await fetch('/api/auth/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
   });
 
-  if(response.ok) {
+  if (response.ok) {
     const data = await response.json();
+    const prevUserId = localStorage.getItem('currentUser');
+    const newUserId = data.id;
+
+    if (prevUserId && prevUserId !== newUserId) {
+			dispatch(clearCart(prevUserId));
+		}
+
+    localStorage.setItem('currentUser', newUserId);
     dispatch(setUser(data));
   } else if (response.status < 500) {
     const errorMessages = await response.json();
-    console.log('ERRORR MESSE', errorMessages)
-    return errorMessages
+    return errorMessages;
   } else {
-    return { server: "Something went wrong. Please try again" }
+    return { server: 'Something went wrong. Please try again' };
   }
 };
 
-export const thunkLogout = () => async (dispatch) => {
-  await fetch("/api/auth/logout");
-  dispatch(removeUser());
+export const thunkLogout = () => async (dispatch, getState) => {
+	const state = getState();
+	const userId = state.session?.user?.id;
+
+	if (userId) {
+		const cart = state.cart.cartItems;
+		if (cart.length > 0) {
+			localStorage.setItem(`cartItems_${userId}`, JSON.stringify(cart)); // ✅ Save cart
+		}
+	}
+
+	await fetch('/api/auth/logout');
+	dispatch(removeUser());
+	dispatch(clearCart());
 };
 
 
@@ -81,7 +110,7 @@ export const addFundsThunk = (fundsObject) => async (dispatch) => {
     });
     if(response.ok){
         const data = await response.json()
-        console.log('DATA', data)
+        // console.log('DATA', data)
         dispatch(editUser(data))
     }
     else if(response.status < 500){
@@ -119,7 +148,7 @@ export const editUserThunk = (updateObj) => async (dispatch) => {
     });
     if(response.ok){
         const data = await response.json()
-        console.log('DATA', data)
+        // console.log('DATA', data)
         dispatch(editUser(data))
     }
     else if(response.status < 500){
@@ -144,7 +173,7 @@ export const uploadPfp = (file) => async (dispatch) => {
   });
   if(response.ok){
       const data = await response.json()
-      console.log('DATA', data)
+      // console.log('DATA', data)
       dispatch(editUser(data))
   }
   else if(response.status < 500){
@@ -153,6 +182,20 @@ export const uploadPfp = (file) => async (dispatch) => {
   } else {
     return {server: 'Something went wrong. Please try again'}
   }
+}
+
+export const guestLogin = (address) => async (dispatch)=>{
+  const guest = {
+    firstName: "Guest",
+    guestAccount: true,
+    address: address.address,
+    city: address.city,
+    state: address.state,
+    zip: address.zip,
+    wallet: 0
+  }
+
+  await dispatch(setUser(guest))
 }
 
 const initialState = { user: null };
@@ -171,3 +214,5 @@ function sessionReducer(state = initialState, action) {
 }
 
 export default sessionReducer;
+
+

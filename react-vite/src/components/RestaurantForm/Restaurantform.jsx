@@ -262,6 +262,7 @@ export default function RestaurantForm() {
         console.log('Form errors:', formErrors);
         console.log('Error keys:', Object.keys(formErrors));
         console.log('Has empty required:', hasEmptyRequired());
+        console.log('Form data being submitted:', formData);
     };
 
     const hasEmptyRequired = () => {

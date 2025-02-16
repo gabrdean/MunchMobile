@@ -30,12 +30,14 @@ const CUISINE_TYPES = [
 function HomePage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    // const user = useSelector((store) => store.session.user);
     const restaurants = useSelector(state => state.restaurants.restaurants);
     const [selectedCuisine, setSelectedCuisine] = useState(null);
 
     useEffect(() => {
         dispatch(getAllRestaurants());
     }, [dispatch]);
+
 
     const handleRestaurantClick = (restaurantId) => {
         navigate(`/restaurants/${restaurantId}`);
@@ -56,7 +58,7 @@ function HomePage() {
 
     // Apply cuisine filter only to active restaurants
     const filteredRestaurants = selectedCuisine
-        ? activeRestaurants.filter(restaurant => 
+        ? activeRestaurants.filter(restaurant =>
             restaurant.cuisineType.toLowerCase() === selectedCuisine.toLowerCase())
         : activeRestaurants;
 
@@ -71,7 +73,7 @@ function HomePage() {
                             <button
                                 key={cuisine.name}
                                 onClick={() => handleCuisineClick(cuisine.name)}
-                                className={`cuisine-button ${selectedCuisine === cuisine.name ? 'active' : ''} 
+                                className={`cuisine-button ${selectedCuisine === cuisine.name ? 'active' : ''}
                                           ${!isAvailable ? 'disabled' : ''}`}
                                 disabled={!isAvailable}
                             >
@@ -87,20 +89,20 @@ function HomePage() {
                     <h2>
                         {selectedCuisine ? `${selectedCuisine} Restaurants` : 'All Restaurants'}
                         <span className="results-count">
-                            ({filteredRestaurants.length} results)
+                            {/* ({filteredRestaurants.length} results) */}
                         </span>
                     </h2>
                     <div className='restaurants-grid'>
-                        {filteredRestaurants.map((restaurant) => ( 
-                            <div 
-                                key={restaurant.id} 
+                        {filteredRestaurants.map((restaurant) => (
+                            <div
+                                key={restaurant.id}
                                 className='restaurant-card'
                                 onClick={() => handleRestaurantClick(restaurant.id)}
                             >
                                 <div className='restaurant-image'>
-                                    <img 
-                                        src={restaurant.storeImage || '/placeholder.jpg'} 
-                                        alt={restaurant.name} 
+                                    <img
+                                        src={restaurant.storeImage || '/placeholder.jpg'}
+                                        alt={restaurant.name}
                                     />
                                 </div>
                                 <div className='restaurant-info'>

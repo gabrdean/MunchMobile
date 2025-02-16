@@ -36,7 +36,7 @@ function EmailPage(){
     return (
 			<div>
 				<h1>Email</h1>
-				{"You'll use this number sign in"}
+				{"You'll use this email sign in"}
 				<input
 					type='text'
 					value={email}

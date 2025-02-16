@@ -25,17 +25,34 @@ export default function Orders() {
 
 	useEffect(() => {
 		if (!user) navigate('/login');
-	}, [user]);
+	}, [navigate, user]);
 
 	useEffect(() => {
-		if (!orders || orders.length === 0) {
+		if (!orders) {
 			dispatch(getUserOrders());
 		}
 	}, [dispatch, orders]);
 
-	if (isLoading) return <div>Loading orders...</div>;
+	// if (isLoading) return <div>Loading orders...</div>;
 	if (error) return <div className='error-message'>{error}</div>;
 	// if (!orders.length) return <div>No past orders found.</div>;
+
+	if (isLoading) {
+		return (
+			<div className='no-orders-container'>
+				<img
+					src='/images/orders.png'
+					alt='No Orders'
+					className='no-orders-icon'
+				/>
+				<h2>No orders yet</h2>
+				<p>When you place your first order, it will appear here</p>
+				<button className='find-food-btn' onClick={() => navigate('/home')}>
+					Find Food
+				</button>
+			</div>
+		);
+	}
 
 	const handleRestaurantClick = (restaurantId) => {
 		if (restaurantId) {
@@ -74,6 +91,8 @@ export default function Orders() {
 		};
 
 		const response = await dispatch(createOrder(reorderData));
+
+		// console.log('REORDER', response);
 
 		if (response?.payload) {
 			const newOrder = response.payload;

@@ -1,5 +1,5 @@
 // RestaurantMenuManager.jsx
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate, NavLink } from 'react-router-dom';
 import './RestaurantMenuManager.css';
@@ -58,22 +58,22 @@ const RestaurantMenuManager = () => {
                 <div className="menu-container">
                     {menuItems.map(item => (
                         <div key={item.id} className="menu-item">
-                            <img 
-                                src={item.food_image} 
-                                alt={item.name} 
+                            <img
+                                src={item.food_image}
+                                alt={item.name}
                             />
                             <h3>{item.name}</h3>
                             <p>${item.price}</p>
-                            
+
                             <div className="menu-item-actions">
-                                <NavLink 
+                                <NavLink
                                     to={`/menu-items/${item.id}/update`}
                                     element={<UpdateMenuItem />}
                                     className="auth-buttons"
                                 >
                                     Edit
                                 </NavLink>
-                                <NavLink 
+                                <NavLink
                                     to={`/menu-items/${item.id}/delete`}
                                     element={<DeleteMenuItem />}
                                     className="delete-button"

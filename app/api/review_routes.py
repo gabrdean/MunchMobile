@@ -19,6 +19,15 @@ def success_response(message, data=None, status_code=200):
     return jsonify(response), status_code
 
 
+@review_routes.route("/user")
+@login_required
+def get_user_reviews():
+    reviews = Review.query.filter(Review.user_id == current_user.id).all()
+    return success_response(
+        "User reviews retrieved", [review.to_dict() for review in reviews]
+    )
+
+
 # Create a new review (Only logged-in users can create a review)
 
 @review_routes.route("/", methods=["POST"])

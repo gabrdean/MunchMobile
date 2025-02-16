@@ -40,6 +40,11 @@ export const getUserOrders = () => async (dispatch) => {
 
 		const data = await response.json();
 
+		if (data.orders.length === 0) {
+			dispatch(loadUserOrders([]));
+			return;
+		}
+
 		dispatch(loadUserOrders(data.orders));
 	} catch (error) {
 		const errorMessage = await error.json();
@@ -138,9 +143,12 @@ export const placeOrder = (orderId) => async (dispatch) => {
 		dispatch(loadUserOrder(updatedOrder));
 		localStorage.setItem('currentOrder', JSON.stringify(updatedOrder));
 
+		setTimeout(async () => {
+			await dispatch(getUserOrders());
+			dispatch(clearCart(localStorage.getItem('currentUser').id));
+		}, 1000);
 
-		dispatch(clearCart());
-		await dispatch(getUserOrders());
+
 	} catch (error) {
 		const err = (await error.json()) || error.message;
 		dispatch(setError(err));

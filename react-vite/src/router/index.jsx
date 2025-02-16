@@ -20,6 +20,8 @@ import HomePage from '../components/HomePage';
 import RestaurantDetail from '../components/RestaurantDetail';
 import RestaurantForm from '../components/RestaurantForm/Restaurantform';
 import RestaurantMenuManager from '../components/RestaurantMenuManager';
+import MyReviews from '../components/Reviews/MyReviews';
+import PrivateRoute from '../components/Reviews/PrivateRoute';  // Import the PrivateRoute component
 
 export const router = createBrowserRouter([
   {
@@ -62,7 +64,7 @@ export const router = createBrowserRouter([
         element: <Orders />,
       },
       {
-        path: 'reviews/restaurant/:restaurantId', // Updated path from 627f183
+        path: 'reviews/restaurant/:restaurantId', 
         element: <Reviews />,
       },
       {
@@ -75,7 +77,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'favorites',
-        element: <Favorites />
+        element: <Favorites />,
       },
       {
         path: 'menu-items/:id',
@@ -99,7 +101,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'restaurants/:id/update',
-        element: <RestaurantForm />
+        element: <RestaurantForm />,
       },
       {
         path: 'restaurants/:id',
@@ -113,14 +115,22 @@ export const router = createBrowserRouter([
       {
         path: 'checkout', // Added from HEAD
         element: <Checkout />,
-			},
+      },
       {
-				path: 'home',
-				element: <HomePage />,
+        path: 'home',
+        element: <HomePage />,
       },
       {
         path: 'restaurants/:restaurantId/menu',
         element: <RestaurantMenuManager />,
+      },
+      {
+        path: 'reviews',
+        element: (
+          <PrivateRoute>
+            <MyReviews />
+          </PrivateRoute>
+        ),
       },
     ],
   },

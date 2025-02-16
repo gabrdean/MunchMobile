@@ -9,7 +9,7 @@ const DELETE_RESTAURANT = 'DELETE_RESTAURANT';
 const RESTAURANT_ERROR = 'RESTAURANT_ERROR';
 const REACTIVATE_RESTAURANT = 'REACTIVATE_RESTAURANT';
 //actions/restaurants.js
-export const fetchUserRestaurants = (userId) => async (dispatch) => {
+export const fetchUserRestaurants = () => async (dispatch) => {
     const response = await fetch(`/api/restaurants/current`);
     if (response.ok) {
       const data = await response.json();
@@ -112,7 +112,7 @@ export const deleteRestaurant = (id, deleteType) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         });
-        
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -136,9 +136,9 @@ export const reactivateRestaurant = (id) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         });
-        
+
         const data = await response.json();
-        
+
         if (!response.ok) {
             throw new Error(data.message || 'Failed to reactivate restaurant');
         }

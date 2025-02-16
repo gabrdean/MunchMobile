@@ -13,7 +13,7 @@ function LoginFormPage({ isLogin, isSignup }) {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
 
-    if (sessionUser) return <Navigate to="/" replace={true} />;
+    if (sessionUser && !sessionUser.guestAccount) return <Navigate to="/" replace={true} />;
 
     const demoSubmit = async (e, name) => {
         e.preventDefault();
@@ -63,6 +63,7 @@ function LoginFormPage({ isLogin, isSignup }) {
         if (isLogin) serverResponse = await dispatch(thunkLogin(userSubmission));
         if (isSignup) {
             userSubmission.wallet = 999.99;
+            console.log("SIGNUP USER: ", userSubmission)
             serverResponse = await dispatch(thunkSignup(userSubmission));
         }
 

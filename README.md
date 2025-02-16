@@ -1,29 +1,98 @@
-# Flask React Project
+# About NomNow 
 
-This is the starter for the Flask React project.
+NomNow is an online platform that connects people with local restaurants, similar to UberEats. It allows users to browse restaurants and their menus, place new orders, reorder past meals, leave restaurant reviews, and create their own restaurant listings and menus.
 
-## Getting started
+[Visit the Live Site](https://nomnow-75lb.onrender.com/) 
 
-1. Clone this repository (only this branch).
+<img width="400" alt="NomNow-homepage" src="./react-vite/public/images/home.png">
 
-2. Install dependencies.
+## Tech Stack
 
-   ```bash
-   pipenv install -r requirements.txt
-   ```
+### Frameworks and Libraries
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
+![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) 
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) 
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) 
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) 
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) 
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 
-3. Create a __.env__ file based on the example with proper settings for your
-   development environment.
+ ### Database:
+ ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+ 
+ ### Hosting:
+ ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 
-4. Make sure the SQLite3 database connection URL is in the __.env__ file.
+## Features & Functionality
+
+1. Restaurants
+2. Menu Items
+3. Reviews
+4. Cart
+5. Checkout
+6. Past Orders
+7. Manage Account
+
+
+### Restaurants:
+Users can browse restaurants to explore and order from.
+
+<img width="400" alt="NomNow-restaurants" src="./react-vite/public/images/restaurants.png">
+
+### Menu Items:
+Users can view all menu items for each restaurant.
+
+<img width="400" alt="NomNow-menu-items" src="./react-vite/public/images/menu-items.png">
+
+### Reviews:
+Users can read reviews for each restaurant, and leave reviews for restaurants they have ordered from.
+
+<img width="400" alt="NomNow-reviews" src="./react-vite/public/images/reviews.png">
+
+### Cart:
+Users can add items to their cart from a single restaurant.
+
+<img width="400" alt="NomNow-cart" src="./react-vite/public/images/cart.png">
+
+### Checkout:
+Users can checkout to place an order from a single restaurant.
+
+<img width="400" alt="NomNow-checkout" src="./react-vite/public/images/checkout.png">
+
+### Past Orders:
+Users can view and re-order past orders.
+
+<img width="400" alt="NomNow-orders" src="./react-vite/public/images/past-orders.png">
+
+### Manage Account:
+Users can manage their account and create, update, and delete restaurants and menu items.
+
+<img width="400" alt="NomNow-account" src="./react-vite/public/images/manage-account.png">
+
+## Future Features
+
+1. Search
+
+## Setup
+1. Clone this repository 
+
+2. Install dependencies
+
+      ```bash
+      pipenv install -r requirements.txt
+      ```
+
+3. Create a **.env** file based on the example with proper settings for your
+   development environment
+
+4. Make sure the SQLite3 database connection URL is in the **.env** file
 
 5. This starter organizes all tables inside the `flask_schema` schema, defined
    by the `SCHEMA` environment variable.  Replace the value for
    `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention.**
+   convention**.
 
-6. Get into your pipenv, migrate your database, seed your database, and run your
-   Flask app:
+6. Get into your pipenv, migrate your database, seed your database, and run your Flask app
 
    ```bash
    pipenv shell
@@ -41,91 +110,15 @@ This is the starter for the Flask React project.
    flask run
    ```
 
-7. The React frontend has no styling applied. Copy the __.css__ files from your
-   Authenticate Me project into the corresponding locations in the
-   __react-vite__ folder to give your project a unique look.
 
-8. To run the React frontend in development, `cd` into the __react-vite__
-   directory and run `npm i` to install dependencies. Next, run `npm run build`
-   to create the `dist` folder. The starter has modified the `npm run build`
-   command to include the `--watch` flag. This flag will rebuild the __dist__
-   folder whenever you change your code, keeping the production version up to
-   date.
+## Contact
 
-## Deployment through Render.com
+• Burak Ozdemir | &nbsp; [GitHub](https://github.com/burakoncuy)
 
-First, recall that Vite is a development dependency, so it will not be used in
-production. This means that you must already have the __dist__ folder located in
-the root of your __react-vite__ folder when you push to GitHub. This __dist__
-folder contains your React code and all necessary dependencies minified and
-bundled into a smaller footprint, ready to be served from your Python API.
+• Gabriel Dean | &nbsp; [GitHub](https://github.com/gabrdean)
 
-Begin deployment by running `npm run build` in your __react-vite__ folder and
-pushing any changes to GitHub.
+• Katie Leong | &nbsp; [GitHub](https://github.com/heykatie)
 
-Refer to your Render.com deployment articles for more detailed instructions
-about getting started with [Render.com], creating a production database, and
-deployment debugging tips.
+• Marcelle Armstrong | &nbsp; [GitHub](https://github.com/Mcode4)
 
-From the Render [Dashboard], click on the "New +" button in the navigation bar,
-and click on "Web Service" to create the application that will be deployed.
-
-Select that you want to "Build and deploy from a Git repository" and click
-"Next". On the next page, find the name of the application repo you want to
-deploy and click the "Connect" button to the right of the name.
-
-Now you need to fill out the form to configure your app. Most of the setup will
-be handled by the __Dockerfile__, but you do need to fill in a few fields.
-
-Start by giving your application a name.
-
-Make sure the Region is set to the location closest to you, the Branch is set to
-"main", and Runtime is set to "Docker". You can leave the Root Directory field
-blank. (By default, Render will run commands from the root directory.)
-
-Select "Free" as your Instance Type.
-
-### Add environment variables
-
-In the development environment, you have been securing your environment
-variables in a __.env__ file, which has been removed from source control (i.e.,
-the file is gitignored). In this step, you will need to input the keys and
-values for the environment variables you need for production into the Render
-GUI.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from the **External Database URL** field)
-
-**Note:** Add any other keys and values that may be present in your local
-__.env__ file. As you work to further develop your project, you may need to add
-more environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment.
-
-### Deploy
-
-Now you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your Dockerfile
-commands being executed and any errors that occur.
-
-When deployment is complete, open your deployed site and check to see that you
-have successfully deployed your Flask application to Render! You can find the
-URL for your site just below the name of the Web Service at the top of the page.
-
-**Note:** By default, Render will set Auto-Deploy for your project to true. This
-setting will cause Render to re-deploy your application every time you push to
-main, always keeping it up to date.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+• Samai Althiabat | &nbsp; [GitHub](https://github.com/SamaAlt)

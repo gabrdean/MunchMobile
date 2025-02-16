@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavoriteItems } from '../../redux/menuItems';
 import { Link } from 'react-router-dom';
@@ -6,11 +6,22 @@ import './MenuItemsFavorite.css'; // Import the updated CSS
 
 const Favorites = () => {
   const dispatch = useDispatch();
-  const favoriteItems = useSelector(state => state.menuItems.favoriteItems); // Get favorite items from Redux store
+  const favoriteItems = useSelector(state => state.menuItems.favoriteItems);
+  const user = useSelector(state => state.session.user);
 
   useEffect(() => {
-    dispatch(getFavoriteItems()); // Dispatch action to fetch favorite items
-  }, [dispatch]);
+    if (user) {
+      dispatch(getFavoriteItems());
+    }
+  }, [dispatch, user]);
+
+  if (!user) {
+    return (
+      <div className="favorites-container">
+        <h2 className="no-favorites-message">Please log in to view your favorites.</h2>
+      </div>
+    );
+  }
 
   if (!favoriteItems.length) {
     return (
@@ -19,8 +30,6 @@ const Favorites = () => {
       </div>
     );
   }
-
-  
 
   return (
     <div className="favorites-container">
@@ -40,7 +49,5 @@ const Favorites = () => {
       </ul>
     </div>
   );
- 
 };
-
 export default Favorites;
